@@ -17,9 +17,8 @@ Name:		iexplore
 Version:	%ver
 Release:	%rel
 License:	Proprietary
-Group:		Networking/WWW
-######		Unknown group!
-Source0:	http://mirror.aarnet.edu.au/pub/microsoft/internet-explorer/5.5sp1/win9x/ie55sp1.exe
+Group:		X11/Applications/Networking
+Source0:	http://www.greenapple.com/access/software/custom-browsers/files/ie55sp1.exe
 Source1:	http://www.james.id.au/specfiles/%{name}-supplementary.tar.bz2
 Vendor:		Microsoft
 URL:		http://www.microsoft.com/windows/ie/support/ie55exsupport.asp
@@ -49,9 +48,8 @@ tar xjvf $RPM_SOURCE_DIR/iexplore-supplementary.tar.bz2
 cd $RPM_BUILD_ROOT
 mkdir tmp
 # pull out the files with interesting stuff in them.
-mv "ie 5.5 sp1 full"/ie_s*.cab tmp/
-mv "ie 5.5 sp1 full"/iemil_3.cab tmp/
-rm -rf "ie 5.5 sp1 full"
+mv ie_s*.cab tmp/
+mv iemil_3.cab tmp/
 cd tmp
 cabextract -L ie_s*
 rm -f ie_s*
