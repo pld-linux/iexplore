@@ -7,10 +7,10 @@
 
 %define	ver	5.5SP1
 %define	rel	1
-%define _wine_cdrive    %{_datadir}/wine
-%define _wine_system    %{_wine_cdrive}/windows/system
-%define _wine_programs  %{_wine_cdrive}/'Program Files'
-%define _installdir     %{_wine_programs}/'Internet Explorer'
+%define _wine_cdrive	%{_datadir}/wine
+%define _wine_system	%{_wine_cdrive}/windows/system
+%define _wine_programs	%{_wine_cdrive}/'Program Files'
+%define _installdir	%{_wine_programs}/'Internet Explorer'
 
 Summary:	Microsoft Internet Explorer 5.5SP1
 Name:		iexplore
@@ -57,11 +57,11 @@ cabextract -d files -L ie_*.CAB
 cabextract -d files -L iemil_3.cab
 rm -f *.CAB *.cab
 # put the files in their final positions
-install -d $RPM_BUILD_ROOT/%{_installdir}
-install -d $RPM_BUILD_ROOT/%{_wine_system}
+install -d $RPM_BUILD_ROOT%{_installdir}
+install -d $RPM_BUILD_ROOT%{_wine_system}
 cd files
-mv iexplore.exe $RPM_BUILD_ROOT/%{_installdir}
-mv * $RPM_BUILD_ROOT/%{_wine_system}
+mv iexplore.exe $RPM_BUILD_ROOT%{_installdir}
+mv * $RPM_BUILD_ROOT%{_wine_system}
 perl -p -i -e "s|/usr/wine|%{_wine_cdrive}|g" $RPM_BUILD_ROOT%{_datadir}/iexplore/config
 perl -p -i -e "s|/usr/wine|%{_wine_cdrive}|g" $RPM_BUILD_ROOT%{_bindir}/iexplore
 
