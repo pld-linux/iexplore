@@ -20,7 +20,7 @@ Release:	%rel
 Vendor:		Microsoft
 Source0:	http://mirror.aarnet.edu.au/pub/microsoft/internet-explorer/5.5sp1/win9x/ie55sp1.exe
 Source1:	http://www.james.id.au/specfiles/%{name}-supplementary.tar.bz2
-Requires:	wine, wine-utils, dcom98
+Requires:	wine, wine-programs, dcom98
 BuildRequires:	wine, cabextract, unzip, util-linux
 Group:		Networking/WWW
 ######		Unknown group!
@@ -32,6 +32,7 @@ Url:		http://www.microsoft.com/windows/ie/support/ie55exsupport.asp
 The private, reliable, and flexible internet browsing experience.
 
 %prep
+rm -rf $RPM_BUILD_ROOT
 mkdir $RPM_BUILD_ROOT
 cd $RPM_BUILD_ROOT
 # unpack the insstaller file.
@@ -40,7 +41,6 @@ unzip -LL $RPM_SOURCE_DIR/ie55sp1.exe
 tar xjvf $RPM_SOURCE_DIR/iexplore-supplementary.tar.bz2
 
 %install
-rm -rf $RPM_BUILD_ROOT
 cd $RPM_BUILD_ROOT
 mkdir tmp
 # pull out the files with interesting stuff in them.
@@ -62,7 +62,8 @@ install -d $RPM_BUILD_ROOT/%{_wine_system}
 cd files
 mv iexplore.exe $RPM_BUILD_ROOT/%{_installdir}
 mv * $RPM_BUILD_ROOT/%{_wine_system}
-
+perl -p -i -e "s|/usr/wine|%{_wine_cdrive}|g" $RPM_BUILD_ROOT%{_datadir}/iexplore/config
+perl -p -i -e "s|/usr/wine|%{_wine_cdrive}|g" $RPM_BUILD_ROOT%{_bindir}/iexplore
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -72,7 +73,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/iexplore
 %{_datadir}/iexplore/config
 %{_datadir}/iexplore/system.reg
-%{_prefix}/wine/Program*/Internet*/iexplore.exe
+%{_datadir}/wine/Program*/Internet*/iexplore.exe
 %{_wine_system}/actxprxy.dll
 %{_wine_system}/apps.hlp
 %{_wine_system}/atl.dll
