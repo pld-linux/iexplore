@@ -7,26 +7,31 @@
 
 %define	ver	5.5SP1
 %define	rel	1
-%define _wine_cdrive	%{_datadir}/wine
-%define _wine_system	%{_wine_cdrive}/windows/system
-%define _wine_programs	%{_wine_cdrive}/'Program Files'
-%define _installdir	%{_wine_programs}/'Internet Explorer'
+%define	_wine_cdrive	%{_datadir}/wine
+%define	_wine_system	%{_wine_cdrive}/windows/system
+%define	_wine_programs	%{_wine_cdrive}/'Program Files'
+%define	_installdir	%{_wine_programs}/'Internet Explorer'
 
 Summary:	Microsoft Internet Explorer 5.5SP1
 Name:		iexplore
-ExclusiveArch:	%{ix86}
 Version:	%ver
 Release:	%rel
-Vendor:		Microsoft
-Source0:	http://mirror.aarnet.edu.au/pub/microsoft/internet-explorer/5.5sp1/win9x/ie55sp1.exe
-Source1:	http://www.james.id.au/specfiles/%{name}-supplementary.tar.bz2
-Requires:	wine, wine-programs, dcom98
-BuildRequires:	wine, cabextract, unzip, util-linux
+License:	Proprietary
 Group:		Networking/WWW
 ######		Unknown group!
-License:	Proprietary
+Source0:	http://mirror.aarnet.edu.au/pub/microsoft/internet-explorer/5.5sp1/win9x/ie55sp1.exe
+Source1:	http://www.james.id.au/specfiles/%{name}-supplementary.tar.bz2
+Vendor:		Microsoft
+URL:		http://www.microsoft.com/windows/ie/support/ie55exsupport.asp
+BuildRequires:	cabextract
+BuildRequires:	unzip
+BuildRequires:	util-linux
+BuildRequires:	wine
+Requires:	dcom98
+Requires:	wine
+Requires:	wine-programs
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-Url:		http://www.microsoft.com/windows/ie/support/ie55exsupport.asp
+ExclusiveArch:	%{ix86}
 
 %description
 The private, reliable, and flexible internet browsing experience.
