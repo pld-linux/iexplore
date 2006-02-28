@@ -14,13 +14,12 @@
 
 Summary:	Microsoft Internet Explorer 5.5SP1
 Name:		iexplore
-Version:	%ver
-Release:	%rel
+Version:	%{ver}
+Release:	%{rel}
 License:	Proprietary
 Group:		X11/Applications/Networking
 Source0:	http://www.greenapple.com/access/software/custom-browsers/files/ie55sp1.exe
 Source1:	http://www.james.id.au/specfiles/%{name}-supplementary.tar.bz2
-Vendor:		Microsoft
 URL:		http://www.microsoft.com/windows/ie/support/ie55exsupport.asp
 BuildRequires:	cabextract
 BuildRequires:	unzip
@@ -29,23 +28,21 @@ BuildRequires:	wine
 Requires:	dcom98
 Requires:	wine
 Requires:	wine-programs
-BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 ExclusiveArch:	%{ix86}
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-The private, reliable, and flexible internet browsing experience.
+The private, reliable, and flexible Internet browsing experience.
 
 %prep
-rm -rf $RPM_BUILD_ROOT
-mkdir $RPM_BUILD_ROOT
-cd $RPM_BUILD_ROOT
+%setup -qc
 # unpack the insstaller file.
 unzip -LL $RPM_SOURCE_DIR/ie55sp1.exe
 # unpack config, registry etc.
 tar xjvf $RPM_SOURCE_DIR/iexplore-supplementary.tar.bz2
 
 %install
-cd $RPM_BUILD_ROOT
+rm -rf $RPM_BUILD_ROOT
 mkdir tmp
 # pull out the files with interesting stuff in them.
 mv ie_s*.cab tmp/
